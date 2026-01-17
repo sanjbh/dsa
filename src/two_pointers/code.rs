@@ -1,10 +1,7 @@
-use std::cmp::min_by;
-
-
-
 pub fn pair_sum_sorted(nums: &mut [i32], target: i32) -> Option<(usize, usize)> {
-    
-    if nums.is_empty() { return None; }
+    if nums.is_empty() {
+        return None;
+    }
 
     nums.sort();
 
@@ -22,10 +19,12 @@ pub fn pair_sum_sorted(nums: &mut [i32], target: i32) -> Option<(usize, usize)> 
     }
 
     None
-} 
+}
 
 pub fn triplet_sums(nums: &mut [i32]) -> Option<Vec<(i32, i32, i32)>> {
-    if nums.is_empty() { return None }
+    if nums.is_empty() {
+        return None;
+    }
     let mut result = Vec::new();
 
     nums.sort();
@@ -42,7 +41,7 @@ pub fn triplet_sums(nums: &mut [i32]) -> Option<Vec<(i32, i32, i32)>> {
         match pair_sum_sorted(sub_slice, a) {
             Some((b, c)) => {
                 result.push((val_a, sub_slice[b], sub_slice[c]));
-            },
+            }
             None => continue,
         }
     }
@@ -51,7 +50,9 @@ pub fn triplet_sums(nums: &mut [i32]) -> Option<Vec<(i32, i32, i32)>> {
 }
 
 pub fn is_palindrome(s: &str) -> bool {
-    if s.is_empty() { return false; }
+    if s.is_empty() {
+        return false;
+    }
 
     let s: Vec<_> = s.chars().collect();
 
@@ -78,21 +79,18 @@ pub fn is_palindrome(s: &str) -> bool {
     }
 
     true
-
 }
 
-
 pub fn is_palindrome_idiomatic(s: &str) -> bool {
-    let chars = s.chars()
+    let chars = s
+        .chars()
         .filter(|c| c.is_alphanumeric())
         .map(|c| c.to_ascii_lowercase());
 
     chars.clone().eq(chars.rev())
-
 }
 
 pub fn largest_container(heights: &[i32]) -> i32 {
-
     if heights.len() < 2 {
         return 0;
     }
@@ -100,7 +98,7 @@ pub fn largest_container(heights: &[i32]) -> i32 {
     let mut max_area = 0;
     let mut left = 0;
     let mut right = heights.len() - 1;
-    
+
     while left < right {
         let current_area = heights[left].min(heights[right]) * (right - left) as i32;
         max_area = max_area.max(current_area);
